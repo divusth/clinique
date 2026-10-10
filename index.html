@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA Health | عيادة هالة الطبية الشاملة</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-light: #f4f8fb;
+            --card-white: #ffffff;
+            --blue-main: #0052cc;
+            --blue-dark: #071d49;
+            --blue-light: #e6f0ff;
+            --teal-mint: #00b894;
+            --teal-light: #e6f9f5;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --border-color: #cbd5e1;
+            --shadow-soft: 0 10px 30px rgba(0, 82, 204, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 82, 204, 0.15);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Alexandria', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 8%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 82, 204, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--blue-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--blue-main);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-btn {
+            background: var(--blue-light);
+            border: 1px solid var(--blue-main);
+            color: var(--blue-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .lang-btn:hover {
+            background: var(--blue-main);
+            color: var(--card-white);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--blue-main), #003d99);
+            color: var(--card-white);
+            border: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.25);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 82, 204, 0.4);
+        }
+
+        /* Page System */
+        .page-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+            padding-top: 90px;
+            padding-bottom: 60px;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            min-height: calc(100vh - 120px);
+            align-items: center;
+            padding: 0 8%;
+            gap: 40px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--teal-light);
+            color: var(--teal-mint);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 184, 148, 0.3);
+        }
+
+        .hero-title {
+            font-size: 48px;
+            line-height: 1.2;
+            font-weight: 900;
+            color: var(--blue-dark);
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--blue-main);
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 35px;
+            max-width: 520px;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--blue-main), #003d99);
+            color: var(--card-white);
+            border: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-img-box {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            height: 520px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            border: 6px solid var(--card-white);
+        }
+
+        .hero-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 16px 22px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border: 1px solid var(--blue-light);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-card.card-1 { bottom: 30px; right: -20px; }
+        .floating-card.card-2 { top: 40px; left: -20px; animation-delay: 2s; }
+
+        .floating-card i { font-size: 26px; color: var(--blue-main); }
+        .floating-card h4 { font-size: 16px; font-weight: 800; color: var(--blue-dark); }
+        .floating-card p { font-size: 12px; color: var(--text-gray); }
+
+        /* Symptom Checker Section */
+        .checker-section {
+            background: var(--card-white);
+            padding: 35px;
+            border-radius: 28px;
+            box-shadow: var(--shadow-soft);
+            margin: 40px 8%;
+            border: 1px solid rgba(0, 82, 204, 0.1);
+        }
+
+        .checker-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .checker-box {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--blue-light);
+            text-align: center;
+        }
+
+        /* Specialties Section */
+        .specialties-section { padding: 30px 8% 80px; }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--blue-main);
+            color: var(--blue-main);
+            padding: 10px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .back-btn:hover {
+            background: var(--blue-main);
+            color: var(--card-white);
+        }
+
+        .section-header { text-align: center; margin-bottom: 35px; }
+        .section-header h2 { font-size: 36px; font-weight: 900; color: var(--blue-dark); margin-bottom: 10px; }
+        .section-header p { color: var(--text-gray); font-size: 15px; }
+
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+            padding: 10px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--blue-main);
+            color: var(--card-white);
+            border-color: var(--blue-main);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card-item {
+            background: var(--card-white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 82, 204, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-img {
+            position: relative;
+            height: 220px;
+            width: 100%;
+        }
+
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--blue-main);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title { font-size: 20px; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+        .card-desc { color: var(--text-gray); font-size: 13px; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--blue-light);
+            margin-bottom: 20px;
+        }
+
+        .price { font-size: 22px; font-weight: 800; color: var(--teal-mint); }
+
+        .book-btn {
+            background: var(--blue-light);
+            color: var(--blue-main);
+            border: 1px solid var(--blue-main);
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .book-btn:hover {
+            background: var(--blue-main);
+            color: var(--card-white);
+        }
+
+        /* Modal System */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 29, 73, 0.6);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-card {
+            background: var(--card-white);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            transform: scale(0.8);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active .modal-card { transform: scale(1); }
+
+        .modal-header {
+            padding: 22px;
+            background: var(--blue-light);
+            border-bottom: 1px solid rgba(0, 82, 204, 0.1);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--card-white);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: var(--blue-dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body { padding: 25px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--blue-dark); margin-bottom: 6px; }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .whatsapp-submit {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 900px) {
+            .hero-section { grid-template-columns: 1fr; text-align: center; }
+            .hero-desc { margin: 0 auto 30px; }
+            .hero-title { font-size: 34px; }
+            .checker-grid { grid-template-columns: 1fr; }
+            .floating-card.card-1 { right: 0; }
+            .floating-card.card-2 { left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="#" class="logo" onclick="switchPage('hero')">
+            <i class="fa-solid fa-house-medical" style="color: var(--blue-main);"></i> AURA <span>HEALTH</span>
+        </a>
+        <div class="nav-right">
+            <button class="lang-btn" onclick="toggleLanguage()">
+                <i class="fa-solid fa-globe"></i> <span id="langText">FR</span>
+            </button>
+            <button class="nav-btn" onclick="switchPage('specialties')">
+                <i class="fa-solid fa-calendar-check"></i> <span id="navBtnText">حجز موعد طبي</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Pages Container -->
+    <div class="page-container">
+        
+        <!-- PAGE 1: HERO -->
+        <section id="hero" class="page active">
+            <div class="hero-section">
+                <div>
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-shield-halved"></i> <span id="heroBadge">عيادة طبية متكاملة ورعاية متخصصة</span>
+                    </div>
+                    <h1 class="hero-title" id="heroTitle">
+                        صحتكم ورعايتكم هي <span>أولويتنا المطلقة</span>
+                    </h1>
+                    <p class="hero-desc" id="heroDesc">
+                        نقدم لكم أرقى الخدمات الطبية تحت إشراف نخبة من الأطباء والاستشاريين بوجود أحدث التقنيات الطبية لضمان راحتكم وسلامتكم.
+                    </p>
+                    <button class="cta-btn" onclick="switchPage('specialties')">
+                        <span id="ctaBtnText">استكشف التخصصات واطلب موعداً</span> <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+
+                <div class="hero-image-wrapper">
+                    <div class="hero-img-box">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop" alt="Doctor Consultation">
+                    </div>
+
+                    <div class="floating-card card-1">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <div>
+                            <h4>+15 سنة</h4>
+                            <p id="stat1Text">خبرة طبية متقدمة</p>
+                        </div>
+                    </div>
+
+                    <div class="floating-card card-2">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        <div>
+                            <h4>100% رعاية</h4>
+                            <p id="stat2Text">متابعة دقيقة لكل حالة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Symptom Checker -->
+            <div class="checker-section">
+                <h3 style="text-align: center; color: var(--blue-dark); font-size: 24px; margin-bottom: 20px;" id="checkTitle">🩺 المساعد الطبي الذكي - تحديد التخصص</h3>
+                <div class="checker-grid">
+                    <div>
+                        <label style="font-size: 14px; font-weight: 700; color: var(--blue-dark);" id="checkLbl">ما هي الأعراض التي تشعر بها؟</label>
+                        <select id="symptomSelect" onchange="updateSymptomRecommendation()" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); margin-top: 10px; font-size: 14px;">
+                            <option value="general" id="optGen">ألم عام / صداع / إرهاق أو مراجعة دورية</option>
+                            <option value="dental" id="optDent">ألم في الأسنان / اللثة / تجميل وبياض الأسنان</option>
+                            <option value="pediatrics" id="optPed">ارتفاع حرارة الطفل / نمو وتطعيم الأطفال</option>
+                            <option value="checkup" id="optLab">فحوصات شاملة / تحليل دم / تحاليل قبل الزواج</option>
+                        </select>
+                    </div>
+
+                    <div class="checker-box">
+                        <p style="font-size: 13px; color: var(--text-gray);" id="checkResLbl">التخصص الطبي الموصى به لحالتك:</p>
+                        <h4 style="font-size: 20px; color: var(--blue-main); margin: 8px 0;" id="recDept">الطب العام والاستشارات الفورية</h4>
+                        <button class="book-btn" style="margin-top: 10px;" onclick="switchPage('specialties')" id="checkBtn">الانتقال لحجز الموعد</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: SPECIALTIES -->
+        <section id="specialties" class="page">
+            <div class="specialties-section">
+                <button class="back-btn" onclick="switchPage('hero')">
+                    <i class="fa-solid fa-arrow-right"></i> <span id="backBtnText">العودة للرئيسية</span>
+                </button>
+
+                <div class="section-header">
+                    <h2 id="sectionTitle">التخصصات والخدمات الطبية</h2>
+                    <p id="sectionSub">اختاري التخصص المطلوب لحجز موعد مباشر ومريح في العيادة</p>
+                </div>
+
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterCards('all', event)" id="fAll">الكل</button>
+                    <button class="filter-btn" onclick="filterCards('general', event)" id="fGen">🩺 الطب العام</button>
+                    <button class="filter-btn" onclick="filterCards('dental', event)" id="fDent">🦷 طب الأسنان</button>
+                    <button class="filter-btn" onclick="filterCards('pediatrics', event)" id="fPed">👶 طب الأطفال</button>
+                    <button class="filter-btn" onclick="filterCards('checkup', event)" id="fLab">🔬 التحاليل والفحوصات</button>
+                </div>
+
+                <div class="cards-grid">
+                    
+                    <!-- Card 1 -->
+                    <div class="card-item" data-category="general">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?q=80&w=600&auto=format&fit=crop" alt="General Medicine">
+                            <span class="card-tag ctag-1">استشارة عامة 🩺</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title ctitle-1">قسم الطب العام والفحص الشامل</h3>
+                            <p class="card-desc cdesc-1">تشخيص دقيق للحالات المزمنة والطارئة، قياس الضغط والسكر، وتوجيه طبي متخصص لكل الأعمار.</p>
+                            <div class="card-meta">
+                                <span class="price">2,500 د.ج</span>
+                                <span style="font-size: 13px; color: var(--text-gray);">الكشفية</span>
+                            </div>
+                            <button class="book-btn cbook-1" onclick="openModal('قسم الطب العام والفحص الشامل', '2,500 د.ج')">
+                                <i class="fa-calendar-check fa-solid"></i> حجز موعد
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card-item" data-category="dental">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=600&auto=format&fit=crop" alt="Dental Care">
+                            <span class="card-tag ctag-2">طب الأسنان 🦷</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title ctitle-2">قسم جراحة وتجميل الأسنان</h3>
+                            <p class="card-desc cdesc-2">تنظيف وتبييض الأسنان بالليزر، علاج التسوس والعصب، وزراعة الأسنان بأحدث الخامات الطبية.</p>
+                            <div class="card-meta">
+                                <span class="price">4,000 د.ج</span>
+                                <span style="font-size: 13px; color: var(--text-gray);">تبدأ من</span>
+                            </div>
+                            <button class="book-btn cbook-2" onclick="openModal('قسم جراحة وتجميل الأسنان', '4,000 د.ج')">
+                                <i class="fa-calendar-check fa-solid"></i> حجز موعد
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card-item" data-category="pediatrics">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=600&auto=format&fit=crop" alt="Pediatrics">
+                            <span class="card-tag ctag-3">طب الأطفال 👶</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title ctitle-3">قسم طب ورعاية الأطفال الحديثة</h3>
+                            <p class="card-desc cdesc-3">متابعة النمو والتغذية للأطفال، اللقاحات الدورية، وعلاج أمراض الشتاء والحساسية بأجواء مريحة.</p>
+                            <div class="card-meta">
+                                <span class="price">3,000 د.ج</span>
+                                <span style="font-size: 13px; color: var(--text-gray);">الكشفية</span>
+                            </div>
+                            <button class="book-btn cbook-3" onclick="openModal('قسم طب ورعاية الأطفال الحديثة', '3,000 د.ج')">
+                                <i class="fa-calendar-check fa-solid"></i> حجز موعد
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="modalTitle" style="color: var(--blue-dark);">تأكيد الموعد الطبي</h3>
+                <p id="modalPrice" style="font-size: 14px; color: var(--blue-main); margin-top: 4px; font-weight: 700;"></p>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="sendWhatsApp(event)">
+                    <div class="form-group">
+                        <label id="mName">اسم المريض الكامل:</label>
+                        <input type="text" id="clientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="mAge">السن ورقم الهاتف:</label>
+                        <input type="text" id="clientStats" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="mDate">اليوم والتوقيت المفضل:</label>
+                        <input type="text" id="appointmentTime" placeholder="مثال: الغد - 10:00 صباحاً" required>
+                    </div>
+                    <button type="submit" class="whatsapp-submit">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> <span id="mSub">تأكيد الحجز عبر الواتساب</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript logic -->
+    <script>
+        const CLINIC_WHATSAPP = "213600000000"; // رقم استقبال العيادة
+        let currentLang = 'AR';
+        let selectedDept = '';
+        let selectedPrice = '';
+
+        const translations = {
+            AR: {
+                navBtnText: "حجز موعد طبي", heroBadge: "عيادة طبية متكاملة ورعاية متخصصة", heroTitle: 'صحتكم ورعايتكم هي <span>أولويتنا المطلقة</span>', heroDesc: "نقدم لكم أرقى الخدمات الطبية تحت إشراف نخبة من الأطباء والاستشاريين بوجود أحدث التقنيات الطبية لضمان راحتكم وسلامتكم.", ctaBtnText: "استكشف التخصصات واطلب موعداً", stat1Text: "خبرة طبية متقدمة", stat2Text: "متابعة دقيقة لكل حالة", checkTitle: "🩺 المساعد الطبي الذكي - تحديد التخصص", checkLbl: "ما هي الأعراض التي تشعر بها؟", optGen: "ألم عام / صداع / إرهاق أو مراجعة دورية", optDent: "ألم في الأسنان / اللثة / تجميل وبياض الأسنان", optPed: "ارتفاع حرارة الطفل / نمو وتطعيم الأطفال", optLab: "فحوصات شاملة / تحليل دم / تحاليل قبل الزواج", checkResLbl: "التخصص الطبي الموصى به لحالتك:", checkBtn: "الانتقال لحجز الموعد", backBtnText: "العودة للرئيسية", sectionTitle: "التخصصات والخدمات الطبية", sectionSub: "اختاري التخصص المطلوب لحجز موعد مباشر ومريح في العيادة", fAll: "الكل", fGen: "🩺 الطب العام", fDent: "🦷 طب الأسنان", fPed: "👶 طب الأطفال", fLab: "🔬 التحاليل والفحوصات", ctag1: "استشارة عامة 🩺", ctitle1: "قسم الطب العام والفحص الشامل", cdesc1: "تشخيص دقيق للحالات المزمنة والطارئة، قياس الضغط والسكر، وتوجيه طبي متخصص لكل الأعمار.", cbook1: "حجز موعد", ctag2: "طب الأسنان 🦷", ctitle2: "قسم جراحة وتجميل الأسنان", cdesc2: "تنظيف وتبييض الأسنان بالليزر، علاج التسوس والعصب، وزراعة الأسنان بأحدث الخامات الطبية.", cbook2: "حجز موعد", ctag3: "طب الأطفال 👶", ctitle3: "قسم طب ورعاية الأطفال الحديثة", cdesc3: "متابعة النمو والتغذية للأطفال، اللقاحات الدورية، وعلاج أمراض الشتاء والحساسية بأجواء مريحة.", cbook3: "حجز موعد", modalTitle: "تأكيد الموعد الطبي", mName: "اسم المريض الكامل:", mAge: "السن ورقم الهاتف:", mDate: "اليوم والتوقيت المفضل:", mSub: "تأكيد الحجز عبر الواتساب"
+            },
+            FR: {
+                navBtnText: "Rendez-vous Médical", heroBadge: "CLINIQUE MÉDICALE & SOINS SPÉCIALISÉS", heroTitle: 'Votre Santé est Notre <span>Priorité Absolue</span>', heroDesc: "Nous vous offrons des services médicaux d'excellence sous la supervision de médecins spécialistes dotés des meilleures technologies.", ctaBtnText: "Explorer les Spécialités", stat1Text: "Expérience médicale", stat2Text: "Suivi personnalisé", checkTitle: "🩺 Assistant Médical - Choix de la Spécialité", checkLbl: "Quels symptômes ressentez-vous ?", optGen: "Douleur générale / Maux de tête / Bilan de santé", optDent: "Douleur dentaire / Gencives / Esthétique dentaire", optPed: "Fièvre de l'enfant / Vaccins / Croissance", optLab: "Bilan sanguin / Examens de laboratoire", checkResLbl: "Spécialité recommandée :", checkBtn: "Prendre Rendez-vous", backBtnText: "Retour à l'accueil", sectionTitle: "Nos Spécialités Médicales", sectionSub: "Sélectionnez le service médical souhaité pour réserver votre consultation", fAll: "Tous", fGen: "🩺 Médecine Générale", fDent: "🦷 Dentaire", fPed: "👶 Pédiatrie", fLab: "🔬 Bilan & Labo", ctag1: "Consultation 🩺", ctitle1: "Médecine Générale & Bilan", cdesc1: "Diagnostic précis des affections aiguës et chroniques, suivi de tension et diabète pour tous les âges.", cbook1: "Prendre RDV", ctag2: "Dentaire 🦷", ctitle2: "Chirurgie & Esthétique Dentaire", cdesc2: "Détartrage, blanchiment laser, soins de caries et prothèses dentaires de haute qualité.", cbook2: "Prendre RDV", ctag3: "Pédiatrie 👶", ctitle3: "Pédiatrie & Soins de l'Enfant", cdesc3: "Suivi de croissance, vaccinations et traitement des affections pédiatriques dans un cadre bienveillant.", cbook3: "Prendre RDV", modalTitle: "Confirmation de Rendez-vous", mName: "Nom complet du patient:", mAge: "Âge & Numéro de Téléphone:", mDate: "Jour & Heure souhaités:", mSub: "Confirmer sur WhatsApp"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'AR' ? 'FR' : 'AR';
+            document.getElementById('langText').innerText = currentLang === 'AR' ? 'FR' : 'AR';
+            document.documentElement.dir = currentLang === 'AR' ? 'rtl' : 'ltr';
+
+            const t = translations[currentLang];
+            document.getElementById('navBtnText').innerText = t.navBtnText;
+            document.getElementById('heroBadge').innerText = t.heroBadge;
+            document.getElementById('heroTitle').innerHTML = t.heroTitle;
+            document.getElementById('heroDesc').innerText = t.heroDesc;
+            document.getElementById('ctaBtnText').innerText = t.ctaBtnText;
+            document.getElementById('stat1Text').innerText = t.stat1Text;
+            document.getElementById('stat2Text').innerText = t.stat2Text;
+            document.getElementById('checkTitle').innerText = t.checkTitle;
+            document.getElementById('checkLbl').innerText = t.checkLbl;
+            document.getElementById('optGen').innerText = t.optGen;
+            document.getElementById('optDent').innerText = t.optDent;
+            document.getElementById('optPed').innerText = t.optPed;
+            document.getElementById('optLab').innerText = t.optLab;
+            document.getElementById('checkResLbl').innerText = t.checkResLbl;
+            document.getElementById('checkBtn').innerText = t.checkBtn;
+            document.getElementById('backBtnText').innerText = t.backBtnText;
+            document.getElementById('sectionTitle').innerText = t.sectionTitle;
+            document.getElementById('sectionSub').innerText = t.sectionSub;
+            document.getElementById('fAll').innerText = t.fAll;
+            document.getElementById('fGen').innerText = t.fGen;
+            document.getElementById('fDent').innerText = t.fDent;
+            document.getElementById('fPed').innerText = t.fPed;
+            document.getElementById('fLab').innerText = t.fLab;
+
+            document.querySelector('.ctag-1').innerText = t.ctag1;
+            document.querySelector('.ctitle-1').innerText = t.ctitle1;
+            document.querySelector('.cdesc-1').innerText = t.cdesc1;
+            document.querySelector('.cbook-1').innerHTML = `<i class="fa-calendar-check fa-solid"></i> ${t.cbook1}`;
+
+            document.querySelector('.ctag-2').innerText = t.ctag2;
+            document.querySelector('.ctitle-2').innerText = t.ctitle2;
+            document.querySelector('.cdesc-2').innerText = t.cdesc2;
+            document.querySelector('.cbook-2').innerHTML = `<i class="fa-calendar-check fa-solid"></i> ${t.cbook2}`;
+
+            document.querySelector('.ctag-3').innerText = t.ctag3;
+            document.querySelector('.ctitle-3').innerText = t.ctitle3;
+            document.querySelector('.cdesc-3').innerText = t.cdesc3;
+            document.querySelector('.cbook-3').innerHTML = `<i class="fa-calendar-check fa-solid"></i> ${t.cbook3}`;
+
+            document.getElementById('modalTitle').innerText = t.modalTitle;
+            document.getElementById('mName').innerText = t.mName;
+            document.getElementById('mAge').innerText = t.mAge;
+            document.getElementById('mDate').innerText = t.mDate;
+            document.getElementById('mSub').innerText = t.mSub;
+
+            updateSymptomRecommendation();
+        }
+
+        function updateSymptomRecommendation() {
+            const val = document.getElementById('symptomSelect').value;
+            let rec = "";
+            if (val === 'general') rec = currentLang === 'AR' ? "الطب العام والاستشارات الفورية" : "Médecine Générale";
+            else if (val === 'dental') rec = currentLang === 'AR' ? "قسم جراحة وتجميل الأسنان" : "Chirurgie Dentaire";
+            else if (val === 'pediatrics') rec = currentLang === 'AR' ? "قسم طب ورعاية الأطفال" : "Pédiatrie";
+            else rec = currentLang === 'AR' ? "الفحوصات الشاملة والتحاليل" : "Laboratoire & Bilan";
+
+            document.getElementById('recDept').innerText = rec;
+        }
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterCards(cat, event) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.card-item').forEach(card => {
+                if (cat === 'all' || card.dataset.category === cat) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(dept, price) {
+            selectedDept = dept;
+            selectedPrice = price;
+            document.getElementById('modalPrice').innerText = "السعر التقديري: " + price;
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        function sendWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const stats = document.getElementById('clientStats').value;
+            const time = document.getElementById('appointmentTime').value;
+
+            const text = `AURA Health Clinic - حجز موعد طبي%0A%0A🩺 *التخصص:* ${selectedDept}%0A💰 *السعر:* ${selectedPrice}%0A👤 *المريض:* ${name}%0A📊 *المعطيات:* ${stats}%0A⏰ *التوقيت:* ${time}`;
+            window.open(`https://wa.me/${CLINIC_WHATSAPP}?text=${text}`, '_blank');
+            closeModal();
+        }
+    </script>
+</body>
+</html>
